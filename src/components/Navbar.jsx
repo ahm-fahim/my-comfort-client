@@ -46,10 +46,10 @@ const Navbar = () => {
                     </div>
                     <h2 className="font-bold items-center">MY <span className="text-orange-600">COM</span>FORT</h2>
                 </div>
-                <NavLink to ="/" className="p-3 border-t border-gray-300">Home</NavLink>
-                <NavLink to ="/collections" className="p-3 border-t border-gray-300">Collections</NavLink>
-                <NavLink to ="/about" className="p-3 border-t border-gray-300">About</NavLink>
-                <NavLink to ="/contact" className="p-3 border-t border-gray-300">Contact</NavLink>
+                <NavLink onClick={()=>setVisible(false)} to ="/" className="p-3 border-t border-gray-300">Home</NavLink>
+                <NavLink onClick={()=>setVisible(false)} to ="/collections" className="p-3 border-t border-gray-300">Collections</NavLink>
+                <NavLink onClick={()=>setVisible(false)} to ="/about" className="p-3 border-t border-gray-300">About</NavLink>
+                <NavLink onClick={()=>setVisible(false)} to ="/contact" className="p-3 border-t border-gray-300">Contact</NavLink>
             </div>
         </div>
   </div>;
