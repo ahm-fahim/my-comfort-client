@@ -13,7 +13,7 @@ a.active hr{
 }
 @media (max-width: 768px) {
   a.active{
-    color:orangered;
+    color:#daa520;
   }
 }
 
