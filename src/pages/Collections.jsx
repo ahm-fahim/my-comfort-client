@@ -1,21 +1,26 @@
 import { useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
+import Title from "../components/Title";
+import ProductItem from "../components/ProductItem";
 
 const Collections = () => {
   const { products } = useContext(ShopContext);
   const [collections, setCollections] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
 
-  useEffect(() => {}, [products]);
+  useEffect(() => {
+    setCollections(products);
+  }, [products]);
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-gray-300">
-      {/* Rendering collections */}
-
       {/* Filter products */}
       <div className="min-w-60">
-        <p onClick={()=>setShowFilters(!showFilters)}  className="my-2 text-xl flex items-center cursor-pointer gap-2">
+        <p
+          onClick={() => setShowFilters(!showFilters)}
+          className="my-2 text-xl flex items-center cursor-pointer gap-2"
+        >
           FILTERS
           <img
             src={assets.dropdown_icon}
@@ -87,6 +92,31 @@ const Collections = () => {
               Winter wear
             </p>
           </div>
+        </div>
+      </div>
+
+      {/*collections */}
+      <div className="flex-1">
+        <div className="flex justify-between text-base sm:text-2xl mb-4">
+          <Title text1={"ALL"} text2={"COLLECTIONS"} />
+          {/* sort products */}
+          <select className="border-2 border-gray-300 text-sm px-2">
+            <option value="relevant">Sort by: Relevant</option>
+            <option value="low-high">Sort by: Low to High</option>
+            <option value="high-low">Sort by: High to Low</option>
+          </select>
+        </div>
+        {/* Rendering collections */}
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-6">
+          {collections.map((item, index) => (
+            <ProductItem
+              key={index}
+              id={item._id}
+              image={item.image}
+              name={item.name}
+              price={item.price}
+            />
+          ))}
         </div>
       </div>
     </div>
