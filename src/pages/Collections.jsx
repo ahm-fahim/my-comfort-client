@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { use, useContext, useEffect, useState } from "react";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
 import Title from "../components/Title";
@@ -6,11 +6,11 @@ import ProductItem from "../components/ProductItem";
 
 const Collections = () => {
   const { products } = useContext(ShopContext);
-  const [collections, setCollections] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
   const [categoryFilters, setCategoryFilters] = useState([]);
   const [typeFilters, setTypeFilters] = useState([]);
-
+  const [sortOption, setSortOption] = useState("relevant");
   // toggle category filters
   const toggleCategoryFilter = (e) => {
     if (categoryFilters.includes(e.target.value)) {
@@ -44,17 +44,34 @@ const Collections = () => {
         typeFilters.includes(item.subCategory),
       );
     }
-    setCollections(productsCopy);
+    setFilteredProducts(productsCopy);
+  };
+
+  // sort products based on relevance, low to high and high to low
+  const sortProducts = () => {
+    let filteredProductsCopy = filteredProducts.slice();
+    switch (sortOption) {
+      case "low-high":
+        setFilteredProducts(
+          filteredProductsCopy.sort((a, b) => a.price - b.price),
+        );
+        break;
+      case "high-low":
+        setFilteredProducts(
+          filteredProductsCopy.sort((a, b) => b.price - a.price),
+        );
+        break;
+      default:
+        applyFilters();
+        break;
+    }
   };
 
   useEffect(() => {
     applyFilters();
-  }, [categoryFilters, typeFilters]);
+    sortProducts();
+  }, [categoryFilters, typeFilters,sortOption]);
 
-  // set collections to all products on page load
-  useEffect(() => {
-    setCollections(products);
-  }, [products]);
 
   return (
     <div className="flex flex-col sm:flex-row gap-1 sm:gap-10 pt-10 border-t border-gray-300">
@@ -149,7 +166,10 @@ const Collections = () => {
         <div className="flex justify-between text-base sm:text-2xl mb-4">
           <Title text1={"ALL"} text2={"COLLECTIONS"} />
           {/* sort products */}
-          <select className="border-2 border-gray-300 text-sm px-2">
+          <select
+            onChange={(e) => setSortOption(e.target.value)}
+            className="border-2 border-gray-300 text-sm px-2"
+          >
             <option value="relevant">Sort by: Relevant</option>
             <option value="low-high">Sort by: Low to High</option>
             <option value="high-low">Sort by: High to Low</option>
@@ -157,7 +177,7 @@ const Collections = () => {
         </div>
         {/* Rendering collections */}
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 gap-y-6">
-          {collections.map((item, index) => (
+          {filteredProducts.map((item, index) => (
             <ProductItem
               key={index}
               id={item._id}
