@@ -11,7 +11,6 @@ import Orders from "./pages/Orders";
 import PlaceOrders from "./pages/PlaceOrders";
 import Navbar from "./components/Navbar";
 
-
 const App = () => {
   return <div className="px-4 sm:px-[5vw] md:px-[2vw] lg:px-[9vw]">
     <Navbar/>
@@ -22,7 +21,6 @@ const App = () => {
       <Route path="/cart" element={<Cart />} />
       <Route path="/collections" element={<Collections />} />
       <Route path="/contact" element={<Contact />} />
-      <Route path="/products" element={<Products />} /> 
       <Route path="/products/:product_id" element={<Products />} />
       <Route path="/orders" element={<Orders />} />
       <Route path="/placeOrders" element={<PlaceOrders />} /> 
