@@ -8,7 +8,50 @@ const Collections = () => {
   const { products } = useContext(ShopContext);
   const [collections, setCollections] = useState([]);
   const [showFilters, setShowFilters] = useState(false);
+  const [categoryFilters, setCategoryFilters] = useState([]);
+  const [typeFilters, setTypeFilters] = useState([]);
 
+  // toggle category filters
+  const toggleCategoryFilter = (e) => {
+    if (categoryFilters.includes(e.target.value)) {
+      setCategoryFilters((prev) =>
+        prev.filter((item) => item !== e.target.value),
+      );
+    } else {
+      setCategoryFilters((prev) => [...prev, e.target.value]);
+    }
+  };
+
+  // toggle type filters
+  const toggleTypeFilter = (e) => {
+    if (typeFilters.includes(e.target.value)) {
+      setTypeFilters((prev) => prev.filter((item) => item !== e.target.value));
+    } else {
+      setTypeFilters((prev) => [...prev, e.target.value]);
+    }
+  };
+  // apply filters to products and set collections
+  const applyFilters = () => {
+    let productsCopy = products.slice();
+    if (categoryFilters.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        categoryFilters.includes(item.category),
+      );
+    }
+
+    if (typeFilters.length > 0) {
+      productsCopy = productsCopy.filter((item) =>
+        typeFilters.includes(item.subCategory),
+      );
+    }
+    setCollections(productsCopy);
+  };
+
+  useEffect(() => {
+    applyFilters();
+  }, [categoryFilters, typeFilters]);
+
+  // set collections to all products on page load
   useEffect(() => {
     setCollections(products);
   }, [products]);
@@ -40,6 +83,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520] "
                 value={"Men"}
+                onChange={toggleCategoryFilter}
               />
               Men
             </p>
@@ -48,6 +92,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520]  "
                 value={"Women"}
+                onChange={toggleCategoryFilter}
               />
               Women
             </p>
@@ -56,6 +101,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520]"
                 value={"Kids"}
+                onChange={toggleCategoryFilter}
               />
               Kids
             </p>
@@ -72,6 +118,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520] "
                 value={"Topwear"}
+                onChange={toggleTypeFilter}
               />
               Top wear
             </p>
@@ -80,6 +127,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520]  "
                 value={"Bottomwear"}
+                onChange={toggleTypeFilter}
               />
               Bottom wear
             </p>
@@ -88,6 +136,7 @@ const Collections = () => {
                 type="checkbox"
                 className="w-3 accent-[#daa520]"
                 value={"Winterwear"}
+                onChange={toggleTypeFilter}
               />
               Winter wear
             </p>
