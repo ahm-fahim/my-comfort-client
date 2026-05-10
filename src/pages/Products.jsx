@@ -76,7 +76,12 @@ const Products = () => {
               ))}
             </div>
           </div>
-          <button className="bg-[#daa520] text-white text-sm px-8 py-3 active:bg-[#daa520b9]" type="submit">ADD TO CART</button>
+          <button
+            className="bg-[#daa520] text-white text-sm px-8 py-3 active:bg-[#daa520b9]"
+            type="submit"
+          >
+            ADD TO CART
+          </button>
           <hr className="mt-8 text-gray-400 sm:w-4/5" />
           <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
             <p>100% Original Product.</p>
@@ -84,23 +89,38 @@ const Products = () => {
             <p>Easy Return & Exchange Policy Within 7 days.</p>
           </div>
         </div>
-      </div> 
+      </div>
       {/* Description and review section*/}
       <div className="mt-20">
         <div className="flex">
-          <b className="border px-5 py-3 text-sm border-gray-300">Description</b>
-          <p className="border px-5 py-3 text-sm border-gray-300">Reviews (122)</p>
+          <b className="border px-5 py-3 text-sm border-gray-300">
+            Description
+          </b>
+          <p className="border px-5 py-3 text-sm border-gray-300">
+            Reviews (122)
+          </p>
         </div>
-        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum iure quis blanditiis quod, corporis aperiam dignissimos repudiandae omnis repellendus.</p>
-          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit distinctio, veritatis nulla non, enim aut similique accusantium iusto autem quo sed recusandae quos quas neque tempora qui exercitationem molestias doloribus.</p>
+        <div className="flex flex-col gap-4 border px-6 py-6 text-sm border-gray-300 text-gray-500">
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum
+            iure quis blanditiis quod, corporis aperiam dignissimos repudiandae
+            omnis repellendus.
+          </p>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit
+            distinctio, veritatis nulla non, enim aut similique accusantium
+            iusto autem quo sed recusandae quos quas neque tempora qui
+            exercitationem molestias doloribus.
+          </p>
         </div>
       </div>
 
       {/* Display Related Products */}
       <div>
-        <RelatedProducts/>
-
+        <RelatedProducts
+          category={productData.category}
+          subCategory={productData.subCategory}
+        />
       </div>
     </div>
   ) : (
