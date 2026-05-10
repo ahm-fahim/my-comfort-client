@@ -5,7 +5,7 @@ import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
 
 const Cart = () => {
-  const { products, currency, cartItems } = useContext(ShopContext);
+  const { products, currency, cartItems,updateQuantity } = useContext(ShopContext);
   const [cartData, setCartData] = useState([]);
 
   useEffect(() => { 
@@ -24,7 +24,7 @@ const Cart = () => {
     setCartData(tempData);
   }, [cartItems]);
 
-  return <div className="border-t border-gray-400 pt-14">
+  return <div className="border-t border-gray-300 pt-14">
     <div className="text-2xl mb-3">
       <Title text1={'YOUR'} text2={'CART'}/>
     </div>
@@ -48,8 +48,8 @@ const Cart = () => {
                   </div>
                 </div>
               </div>
-              <input className="border border-gray-300 mx-w-10 sm:max-w-20 px-1 sm:px-2 py-1" type="number" min={1} defaultValue={item.quantity} />
-              <img className="w-4 mr-4 sm:w-5 cursor-pointer" src={assets.bin_icon} alt="" />
+              <input onChange={(e)=> e.target.value === '' || e.target.value === '0' ? null : updateQuantity(item._id, item.size, Number(e.target.value))} className="border border-gray-300 mx-w-10 sm:max-w-20 px-1 sm:px-2 py-1" type="number" min={1} defaultValue={item.quantity} />
+              <img onClick={()=>updateQuantity(item._id, item.size, 0)} className="w-4 mr-4 sm:w-5 cursor-pointer" src={assets.bin_icon} alt="" />
             </div>
           )
         })
