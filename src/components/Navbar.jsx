@@ -5,7 +5,7 @@ import { ShopContext } from "../context/ShopContext";
 
 const Navbar = () => {
   const [visible, setVisible] = useState(false);
-  const { setShowSearch } = useContext(ShopContext);
+  const { setShowSearch,getCartCount } = useContext(ShopContext);
 
   return (
     <div className="flex items-center justify-between py-5 font-medium">
@@ -61,7 +61,7 @@ const Navbar = () => {
             className="w-5 cursor-pointer"
           />
           <p className="absolute -bottom-2 -right-2 bg-[#daa520] text-white text-xs rounded-full h-5 p-1 flex items-center justify-center">
-            0
+            {getCartCount()}
           </p>
         </Link>
 
