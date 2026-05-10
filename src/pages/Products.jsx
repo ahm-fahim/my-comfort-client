@@ -2,12 +2,14 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { ShopContext } from "../context/ShopContext";
 import { assets } from "../assets/frontend_assets/assets";
+import RelatedProducts from "../components/RelatedProducts";
 
 const Products = () => {
   const { productId } = useParams();
   const { products, currency } = useContext(ShopContext);
   const [productData, setProductData] = useState(false);
   const [image, setImage] = useState("");
+  const [size, setSize] = useState("");
 
   const fetchProductData = async () => {
     products.map((item) => {
@@ -64,11 +66,41 @@ const Products = () => {
             <p>Select Size : </p>
             <div className="flex gap-2">
               {productData.sizes.map((item, index) => (
-                <button className={`border py-2 px-4 bg-gray-100 border-gray-300`} key={index}>{item}</button>
+                <button
+                  onClick={() => setSize(item)}
+                  className={`border py-2 px-4 bg-gray-100 border-gray-300 ${item === size ? "border-orange-400" : ""}`}
+                  key={index}
+                >
+                  {item}
+                </button>
               ))}
             </div>
           </div>
+          <button className="bg-[#daa520] text-white text-sm px-8 py-3 active:bg-[#daa520b9]" type="submit">ADD TO CART</button>
+          <hr className="mt-8 text-gray-400 sm:w-4/5" />
+          <div className="text-sm text-gray-500 mt-5 flex flex-col gap-1">
+            <p>100% Original Product.</p>
+            <p>Cash On Delivery Is Available On This Product.</p>
+            <p>Easy Return & Exchange Policy Within 7 days.</p>
+          </div>
         </div>
+      </div> 
+      {/* Description and review section*/}
+      <div className="mt-20">
+        <div className="flex">
+          <b className="border px-5 py-3 text-sm border-gray-300">Description</b>
+          <p className="border px-5 py-3 text-sm border-gray-300">Reviews (122)</p>
+        </div>
+        <div className="flex flex-col gap-4 border px-6 py-6 text-sm text-gray-500">
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laborum iure quis blanditiis quod, corporis aperiam dignissimos repudiandae omnis repellendus.</p>
+          <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugit distinctio, veritatis nulla non, enim aut similique accusantium iusto autem quo sed recusandae quos quas neque tempora qui exercitationem molestias doloribus.</p>
+        </div>
+      </div>
+
+      {/* Display Related Products */}
+      <div>
+        <RelatedProducts/>
+
       </div>
     </div>
   ) : (
