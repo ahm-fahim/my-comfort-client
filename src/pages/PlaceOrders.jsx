@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import { useContext, useState } from "react";
 import Title from "../components/Title";
 import CartTotal from "../components/CartTotal";
-import { assets } from "../assets/frontend_assets/assets";
+import { ShopContext } from "../context/ShopContext";
 
 const PlaceOrders = () => {
   const [method, setMethod] = useState('cod');
+  const { navigate } = useContext(ShopContext);
 
   return (
-    <div className="grid grid-cols-1 gap-4 sm:grid-cols-6  border-t border-gray-300">
+    <div className="grid grid-cols-1 gap-4 sm:grid-cols-5  border-t border-gray-300">
       {/* left side  */}
       <div className="col-span-3 flex flex-col gap-4 w-full sm:max-w-[480px">
         <div className="text-xl sm:text-2xl my-3">
@@ -55,7 +56,7 @@ const PlaceOrders = () => {
           />
       </div>
       {/* right side  */}
-      <div className="mt-8 col-span-3">
+      <div className="mt-8 col-span-2">
         <div className="mt-8 ">
           <CartTotal/>
         </div>
@@ -75,6 +76,9 @@ const PlaceOrders = () => {
               <p className={`w-3.5 h-3.5 border border-gray-300 p-1 rounded-full ${method === 'cod' ? 'bg-green-400': ''}`}></p>
               <p className="text-gray-500 text-sm font-medium mx-1 ">CASH ON DELIVERY</p>
             </div>
+          </div>
+          <div className="w-full text-end mt-8">
+            <button onClick={()=>navigate('/orders')} className="bg-[#daa520] text-white text-sm px-16 py-2 active:bg-[#daa520c2]">PLACE ORDER</button>
           </div>
         </div>
       </div>
