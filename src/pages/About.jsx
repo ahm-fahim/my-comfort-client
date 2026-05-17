@@ -1,11 +1,12 @@
 import "react";
 import Title from "../components/Title";
 import { assets } from "../assets/frontend_assets/assets";
+import NewsLetterBox from "../components/NewsLetterBox";
 
 const About = () => {
   return (
     <div>
-      <div className="text-2xl text-center pt-8 border-t">
+      <div className="text-2xl text-center pt-8 border-t border-gray-300">
         <Title text1={"ABOUT"} text2={"US"} />
       </div>
       <div className="my-10 grid grid-cols-1 md:grid-cols-5 gap-6 items-center">
@@ -96,6 +97,9 @@ const About = () => {
           <br />
           <b>Don't just wear the clothes. Wear the feeling.</b>
         </p>
+      </div>
+      <div className="py-10">
+        <NewsLetterBox />
       </div>
     </div>
   );
