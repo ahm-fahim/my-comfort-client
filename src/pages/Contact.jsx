@@ -9,7 +9,7 @@ const Contact = () => {
       <div className="flex items-center justify-center text-2xl pt-10 ">
         <Title text1={"CONTACT"} text2={"US"} />
       </div>
-      <div className="flex items-center justify-center gap-6 py-10">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-6 py-10">
         <img className="col-span-2 w-96"  src={assets.contact_img} />
         <div>
           <div className="flex flex-col gap-1 text-gray-600">
@@ -18,6 +18,7 @@ const Contact = () => {
             <p>Email: info@mycomfort.com</p>
             <p>Phone: (123) 456-7890</p>
           </div>
+          <button className="border border-gray-300 text-[#/daa520] px-10 py-3 my-5 hover:bg-[#daa520] hover:text-white">Explore Jobs</button>
         </div>
       </div>
       <NewsLetterBox/>
